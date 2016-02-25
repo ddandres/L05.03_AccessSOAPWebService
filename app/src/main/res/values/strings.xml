@@ -1,0 +1,17 @@
+<!--
+  ~ Copyright (c) 2016. David de Andrés and Juan Carlos Ruiz, DISCA - UPV, Development of apps for mobile devices.
+  -->
+
+<resources>
+    <string name="app_name">L05.03_AccessSOAPWebService</string>
+    <string name="celsius_degree">ºC</string>
+    <string name="fahrenheit_degree">ºF</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="c2f">Convert temperature from Celsius degrees into Fahrenheit degrees</string>
+    <string name="f2c">Convert temperature from Fahrenheit degrees into Celsius degrees</string>
+    <string name="temperature_hint">Introduce a temperature</string>
+    <string name="not_completed">The temperature could not be converted</string>
+    <string name="not_connected">The device is not connected to the data network</string>
+    <string name="not_data">You should introduce the temperature to be converted</string>
+</resources>
