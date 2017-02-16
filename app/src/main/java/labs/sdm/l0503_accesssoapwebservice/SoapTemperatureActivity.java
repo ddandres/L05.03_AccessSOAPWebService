@@ -118,8 +118,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
     private class TemperatureAsyncTask extends AsyncTask<Object, Void, SoapPrimitive> {
 
         // Constants related to the web service
-        private final static String NAME_SPACE = "http://www.w3schools.com/xml/";
-        private final static String LOCATION = "http://www.w3schools.com/xml/tempconvert.asmx";
+        private final static String NAME_SPACE = "https://www.w3schools.com/xml/";
+        private final static String LOCATION = "https://www.w3schools.com/xml/tempconvert.asmx";
         private final static String ACTION_TO_FAHRENHEIT = "CelsiusToFahrenheit";
         private final static String ACTION_TO_CELSIUS = "FahrenheitToCelsius";
         private final static String CELSIUS = "Celsius";
