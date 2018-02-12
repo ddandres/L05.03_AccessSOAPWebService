@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/L05.03_AccessSOAPWebService.iml" filepath="$PROJECT_DIR$/L05.03_AccessSOAPWebService.iml" />
+      <module fileurl="file://D:\Docencia\SDM\Test\L05.03_AccessSOAPWebService\L05.03_AccessSOAPWebService.iml" filepath="D:\Docencia\SDM\Test\L05.03_AccessSOAPWebService\L05.03_AccessSOAPWebService.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Docencia\SDM\Test\L05.03_AccessSOAPWebService\app\app.iml" filepath="D:\Docencia\SDM\Test\L05.03_AccessSOAPWebService\app\app.iml" />
     </modules>
   </component>
 </project>

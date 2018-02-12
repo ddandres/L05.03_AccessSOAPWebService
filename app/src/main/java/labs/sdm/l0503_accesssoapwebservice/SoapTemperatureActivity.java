@@ -23,6 +23,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 /*
 * Converts a given temperature from Celsius degrees into Fahrenheit degrees (or viceversa)
@@ -46,12 +47,12 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soap_temperature);
 
-        // Keep references to View objects
-        etCelsius = (EditText) findViewById(R.id.etCelsius);
-        etFahrenheit = (EditText) findViewById(R.id.etFahrenheit);
-        pbTemperature = (ProgressBar) findViewById(R.id.pbTemperature);
-        bC2F = (ImageButton) findViewById(R.id.bC2F);
-        bF2C = (ImageButton) findViewById(R.id.bF2C);
+        // Keep references to View objects30
+        etCelsius = findViewById(R.id.etCelsius);
+        etFahrenheit = findViewById(R.id.etFahrenheit);
+        pbTemperature = findViewById(R.id.pbTemperature);
+        bC2F = findViewById(R.id.bC2F);
+        bF2C = findViewById(R.id.bF2C);
     }
 
     /*
@@ -61,7 +62,7 @@ public class SoapTemperatureActivity extends AppCompatActivity {
 
         if (isConnected()) {
             // Create the AsyncTask in charge of accessing the web service in background
-            TemperatureAsyncTask task = new TemperatureAsyncTask();
+            TemperatureAsyncTask task = new TemperatureAsyncTask(this);
 
             switch (v.getId()) {
 
@@ -109,13 +110,16 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         // There will be connectivity when there is a default connected network
         return ((info != null) && (info.isConnected()));
     }
+
     /*
     * Accesses a SOAP web service to convert the given temperature to other units.
     * Input parameters are: an int identifying the operation to perform,
     * and a String representing the temperature in the original units.
     * The output parameter is a String representing the temperature in the target units.
     * */
-    private class TemperatureAsyncTask extends AsyncTask<Object, Void, SoapPrimitive> {
+    private static class TemperatureAsyncTask extends AsyncTask<Object, Void, SoapPrimitive> {
+
+        WeakReference<SoapTemperatureActivity> activity;
 
         // Constants related to the web service
         private final static String NAME_SPACE = "https://www.w3schools.com/xml/";
@@ -128,16 +132,20 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         // Operation to perform
         int op;
 
+        TemperatureAsyncTask(SoapTemperatureActivity activity) {
+            this.activity = new WeakReference<>(activity);
+        }
+
         /*
-        * Updates the UI before starting the background task
-        * */
+                * Updates the UI before starting the background task
+                * */
         @Override
         protected void onPreExecute() {
             // Displays an indeterminate ProgressBar to show that an operation is in progress
-            pbTemperature.setVisibility(View.VISIBLE);
+            this.activity.get().pbTemperature.setVisibility(View.VISIBLE);
             // Disables the buttons so the user cannot launch multiple requests
-            bC2F.setEnabled(false);
-            bF2C.setEnabled(false);
+            this.activity.get().bC2F.setEnabled(false);
+            this.activity.get().bF2C.setEnabled(false);
         }
 
         /*
@@ -156,8 +164,7 @@ public class SoapTemperatureActivity extends AppCompatActivity {
             if (op == CELSIUS_TO_FAHRENHEIT) {
                 propertyName = CELSIUS;
                 action = ACTION_TO_FAHRENHEIT;
-            }
-            else {
+            } else {
                 propertyName = FAHRENHEIT;
                 action = ACTION_TO_CELSIUS;
             }
@@ -200,21 +207,21 @@ public class SoapTemperatureActivity extends AppCompatActivity {
             if (result != null) {
                 // Update the temperature according to the requested operation
                 if (op == CELSIUS_TO_FAHRENHEIT) {
-                    etFahrenheit.setText(result.toString());
+                    this.activity.get().etFahrenheit.setText(result.toString());
                 } else {
-                    etCelsius.setText(result.toString());
+                    this.activity.get().etCelsius.setText(result.toString());
                 }
             }
             // Notify the user that the request could not be completed
             else {
-                Toast.makeText(SoapTemperatureActivity.this,R.string.not_completed,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.activity.get(), R.string.not_completed, Toast.LENGTH_SHORT).show();
             }
 
             // Hides the indeterminate ProgressBar as the operation has finished
-            pbTemperature.setVisibility(View.INVISIBLE);
+            this.activity.get().pbTemperature.setVisibility(View.INVISIBLE);
             // Enables the buttons so the user cannot launch another request
-            bC2F.setEnabled(true);
-            bF2C.setEnabled(true);
+            this.activity.get().bC2F.setEnabled(true);
+            this.activity.get().bF2C.setEnabled(true);
         }
 
 
