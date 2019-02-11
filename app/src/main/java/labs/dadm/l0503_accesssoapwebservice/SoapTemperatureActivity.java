@@ -2,7 +2,7 @@
  * Copyright (c) 2016. David de Andrés and Juan Carlos Ruiz, DISCA - UPV, Development of apps for mobile devices.
  */
 
-package labs.sdm.l0503_accesssoapwebservice;
+package labs.dadm.l0503_accesssoapwebservice;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 /*
-* Converts a given temperature from Celsius degrees into Fahrenheit degrees (or viceversa)
-* using the SOAP web service located at: http://www.w3schools.com/xml/tempconvert.asmx
-* */
+ * Converts a given temperature from Celsius degrees into Fahrenheit degrees (or viceversa)
+ * using the SOAP web service located at: http://www.w3schools.com/xml/tempconvert.asmx
+ * */
 public class SoapTemperatureActivity extends AppCompatActivity {
 
     // Identify the operation to perform
@@ -56,8 +56,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
     }
 
     /*
-    * Handles the event to convert the temperature
-    * */
+     * Handles the event to convert the temperature
+     * */
     public void convertTemperature(View v) {
 
         if (isConnected()) {
@@ -100,8 +100,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
     }
 
     /*
-    * Determines whether the device has got Internet connection.
-    * */
+     * Determines whether the device has got Internet connection.
+     * */
     public boolean isConnected() {
         // Get a reference to the ConnectivityManager
         ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -112,11 +112,11 @@ public class SoapTemperatureActivity extends AppCompatActivity {
     }
 
     /*
-    * Accesses a SOAP web service to convert the given temperature to other units.
-    * Input parameters are: an int identifying the operation to perform,
-    * and a String representing the temperature in the original units.
-    * The output parameter is a String representing the temperature in the target units.
-    * */
+     * Accesses a SOAP web service to convert the given temperature to other units.
+     * Input parameters are: an int identifying the operation to perform,
+     * and a String representing the temperature in the original units.
+     * The output parameter is a String representing the temperature in the target units.
+     * */
     private static class TemperatureAsyncTask extends AsyncTask<Object, Void, SoapPrimitive> {
 
         WeakReference<SoapTemperatureActivity> activity;
@@ -137,8 +137,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         }
 
         /*
-                * Updates the UI before starting the background task
-                * */
+         * Updates the UI before starting the background task
+         * */
         @Override
         protected void onPreExecute() {
             // Displays an indeterminate ProgressBar to show that an operation is in progress
@@ -149,8 +149,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         }
 
         /*
-        * Accesses the web service on background convert the given temperature to other units.
-        * */
+         * Accesses the web service on background convert the given temperature to other units.
+         * */
         @Override
         protected SoapPrimitive doInBackground(Object... params) {
 
@@ -198,8 +198,8 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         }
 
         /*
-       * Updates the UI according to the received response
-       * */
+         * Updates the UI according to the received response
+         * */
         @Override
         protected void onPostExecute(SoapPrimitive result) {
 
