@@ -5,8 +5,11 @@
 package labs.dadm.l0503_accesssoapwebservice;
 
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -102,14 +105,27 @@ public class SoapTemperatureActivity extends AppCompatActivity {
 
     /*
      * Determines whether the device has got Internet connection.
-     */
+     * */
     public boolean isConnected() {
+        boolean result = false;
+
         // Get a reference to the ConnectivityManager
         ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         // Get information about the default active data network
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        // There will be connectivity when there is a default connected network
-        return ((info != null) && (info.isConnected()));
+        if (Build.VERSION.SDK_INT > 22) {
+            final Network activeNetwork = manager.getActiveNetwork();
+            if (activeNetwork != null) {
+                final NetworkCapabilities networkCapabilities = manager.getNetworkCapabilities(activeNetwork);
+                result = networkCapabilities != null && (
+                        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
+            }
+        } else {
+            NetworkInfo info = manager.getActiveNetworkInfo();
+            result = ((info != null) && (info.isConnected()));
+        }
+
+        return result;
     }
 
     /*
