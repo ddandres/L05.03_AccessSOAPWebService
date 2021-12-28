@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/L05.03_AccessSOAPWebService.iml" filepath="$PROJECT_DIR$/.idea/modules/L05.03_AccessSOAPWebService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/L05.03_AccessSOAPWebService.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/L05.03_AccessSOAPWebService.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/L05.03_AcessSOAPWebService.iml" filepath="$PROJECT_DIR$/.idea/modules/L05.03_AcessSOAPWebService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/L05.03_AcessSOAPWebService.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/L05.03_AcessSOAPWebService.app.iml" />
     </modules>
   </component>
 </project>

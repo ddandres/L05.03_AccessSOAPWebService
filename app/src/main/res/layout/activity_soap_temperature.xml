@@ -53,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/c2f"
-        android:onClick="convertTemperature"
         android:src="@android:drawable/arrow_down_float"
         app:layout_constraintEnd_toStartOf="@+id/bF2C"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,12 +63,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/f2c"
-        android:onClick="convertTemperature"
         android:src="@android:drawable/arrow_up_float"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bC2F"
         app:layout_constraintTop_toTopOf="@+id/bC2F" />
-
 
     <TextView
         android:id="@+id/textView3"

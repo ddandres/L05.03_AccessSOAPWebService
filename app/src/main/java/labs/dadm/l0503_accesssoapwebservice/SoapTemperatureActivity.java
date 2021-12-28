@@ -28,10 +28,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/*
- * Converts a given temperature from Celsius degrees into Fahrenheit degrees (or viceversa)
- * using the SOAP web service located at: http://www.w3schools.com/xml/tempconvert.asmx
- */
+// Converts a given temperature from Celsius degrees into Fahrenheit degrees (or viceversa)
+// using the SOAP web service located at: http://www.w3schools.com/xml/tempconvert.asmx
 public class SoapTemperatureActivity extends AppCompatActivity {
 
     // Identify the operation to perform
@@ -60,13 +58,15 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         bC2F = findViewById(R.id.bC2F);
         bF2C = findViewById(R.id.bF2C);
 
+        final View.OnClickListener listener = v -> convertTemperature(v.getId());
+        findViewById(R.id.bC2F).setOnClickListener(listener);
+        findViewById(R.id.bF2C).setOnClickListener(listener);
+
         handler = new Handler();
     }
 
-    /*
-     * Handles the event to convert the temperature
-     */
-    public void convertTemperature(View v) {
+    // Handles the event to convert the temperature
+    private void convertTemperature(int clickedButton) {
 
         if (isConnected()) {
             // Create the AsyncTask in charge of accessing the web service in background
@@ -78,7 +78,6 @@ public class SoapTemperatureActivity extends AppCompatActivity {
             bC2F.setEnabled(false);
             bF2C.setEnabled(false);
 
-            final int clickedButton = v.getId();
             if (clickedButton == R.id.bC2F) {
                 // Convert Celsius degrees into Fahrenheit degrees
 
@@ -111,9 +110,7 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         }
     }
 
-    /*
-     * Determines whether the device has got Internet connection.
-     * */
+    // Determines whether the device has got Internet connection.
     public boolean isConnected() {
         boolean result = false;
 
@@ -158,12 +155,10 @@ public class SoapTemperatureActivity extends AppCompatActivity {
         bF2C.setEnabled(true);
     }
 
-    /*
-     * Accesses a SOAP web service to convert the given temperature to other units.
-     * Input parameters are: an int identifying the operation to perform,
-     * and a String representing the temperature in the original units.
-     * The output parameter is a String representing the temperature in the target units.
-     */
+    // Accesses a SOAP web service to convert the given temperature to other units.
+    // Input parameters are: an int identifying the operation to perform,
+    // and a String representing the temperature in the original units.
+    // The output parameter is a String representing the temperature in the target units.
     private class TemperatureThread extends Thread {
 
         // Constants related to the web service
@@ -233,7 +228,7 @@ public class SoapTemperatureActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            handler.post(() -> resultReceived(op, response.toString()));
+            handler.post(() -> resultReceived(op, response != null ? response.toString() : null));
         }
     }
 }
